@@ -1,0 +1,52 @@
+.container {
+    height: 80vh;
+    display: grid;
+    border: 2px solid black;
+    grid-template-areas: "head head head"
+                         " sidebar1 main sidebar2"
+                        "foot foot foot ";
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr 2fr auto;
+}
+
+.head{
+    grid-area: head;
+    background-color: red;
+    text-align: center;
+    justify-content: center;
+    align-content: center;
+}
+
+.sidebar1 {
+    grid-area: sidebar1;
+    background-color: pink;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+
+}
+
+.main{
+    grid-area:main ;
+    background-color: blue;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+}
+
+.sidebar2 {
+    grid-area:sidebar2 ;
+    background-color: magenta;
+    text-align: center;
+    text-align: center;
+align-content: center;
+
+}
+
+.foot{
+    grid-area: foot;
+    background-color: green;
+    text-align: center;
+
+
+}

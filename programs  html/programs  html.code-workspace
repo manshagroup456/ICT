@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../programs c++"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "programs  html"
+	}
+}

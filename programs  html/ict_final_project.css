@@ -1,0 +1,61 @@
+.trending-shows {
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.trending-show {
+    display: inline-block;
+    width: 144px;
+    height: 216px;
+    margin-right: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.trending-show img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.show-details {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.trending-show:hover .show-details {
+    opacity: 1;
+}
+
+.show-details h6 {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.show-details p {
+    color: #ccc;
+    font-size: 12px;
+    margin: 0;
+}
+
+.show-details i {
+    margin: 5px;
+    font-size: 18px; 
+}
+.trending-shows {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: thin; /* Reduce scrollbar thickness */
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent; /* Dark gray scrollbar with transparent track */
+}

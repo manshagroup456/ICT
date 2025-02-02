@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netflix Clone - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="ict_final_project.css">
+    <style>
+        body {
+            background-color: #141414;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        .navbar {
+            background-color: transparent !important;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            z-index: 10;
+        }
+        .navbar-brand {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #e50914;
+        }
+        .navbar-brand:hover {
+            color: #ff0a16;
+        }
+        .navbar-nav .nav-link {
+            font-size: 1.1rem;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ff0a16;
+        }
+        .btn-custom {
+            background-color: #e50914;
+            border: none;
+            color: white;
+        }
+        .btn-custom:hover {
+            background-color: #ff0a16;
+        }
+        footer {
+            background-color: #141414;
+            padding: 20px 0;
+            color: gray;
+        }
+        video {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            text-align: left;
+            z-index: 2;
+        }
+        .hero-text h1 {
+            font-size: 3rem;
+            font-weight: bold;
+        }
+        .hero-buttons button {
+            margin: 0 10px 10px 0;
+        }
+        .mute-btn {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 3;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .mute-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .hero-text p {
+            margin: 10px 0;
+        }
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+        }
+        .hero-buttons button {
+            font-size: 1rem;
+        }
+        .hero-buttons button:first-child {
+            margin-right: 15px;
+        }
+        .scroll-section {
+            position: relative;
+            margin: 30px 0;
+        }
+        .scroll-section h2 {
+            margin-bottom: 20px;
+        }
+        .scroll-container {
+            display: flex;
+            overflow-x: scroll;
+            gap: 10px;
+            padding: 10px 0;
+            scroll-behavior: smooth;
+        }
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+        .movie-card {
+            position: relative;
+            width: 144px;
+            height: 216px;
+            background-color: #1e1e1e;
+            overflow: hidden;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .movie-card:hover {
+            transform: scale(1.1);
+        }
+        .movie-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .movie-overlay {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px;
+            display: none;
+        }
+        .movie-card:hover .movie-overlay {
+            display: block;
+        }
+        .movie-overlay .icons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .scroll-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 2;
+            border-radius: 50%;
+        }
+        .scroll-btn:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        .scroll-btn-left {
+            left: 0;
+        }
+        .scroll-btn-right {
+            right: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Netflix</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">TV Shows</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">New & Popular</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My List</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-3">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-danger" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> Sign In
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-4" aria-labelledby="navbarDropdown" style="min-width: 300px; background-color: #141414; border: 1px solid #444; border-radius: 10px;">
+                            <form>
+                                <h5 class="text-center mb-3" style="color: #ff0000;">Sign In</h5>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label text-white">Email</label>
+                                    <input type="email" class="form-control bg-dark text-white border-secondary rounded-pill px-3" id="email" placeholder="Enter your email" style="height: 45px;">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label text-white">Password</label>
+                                    <input type="password" class="form-control bg-dark text-white border-secondary rounded-pill px-3" id="password" placeholder="Enter your password" style="height: 45px;">
+                                </div>
+                                <button type="submit" class="btn w-100 rounded-pill" style="background-color: #ff0000; color: white; height: 45px;">Log In</button>
+                                <div class="text-center mt-3">
+                                    <a href="#" class="text-muted" style="font-size: 0.9rem;">Forgot your password?</a>
+                                </div>
+                            </form>
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Video -->
+    <div class="container-fluid p-0 position-relative">
+        <video autoplay muted loop id="background-video">
+            <source src="https://cdn.pixabay.com/video/2023/09/21/181537-866999852_tiny.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button class="mute-btn" id="mute-btn">
+            <i class="fas fa-volume-mute"></i>
+        </button>
+        <div class="hero-text text-white">
+            <h1 class="display-4">XO, Kitty</h1>
+            <p class="lead">#2 in TV Shows Today</p>
+            <p>On scholarship at an elite boarding school in Seoul, American teen Kitty Song Covey discovers she still has a lot to learn about life, love, and family.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-custom btn-lg">Play</button>
+                <button class="btn btn-outline-light btn-lg">More Info</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scrolling Section -->
+    <div class="container">
+        <h2>Trending Shows</h2>
+        <div class="trending-shows">
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322860931/s166/when-the-stars-gossip.avif" alt="Squid Game">
+                <div class="show-details">
+                    <h6>When the Stars Gossip</h6>
+                    <p>2 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Action, Adventure</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/323281168/s166/when-the-phone-rings.avif" alt="The Night Agent">
+                <div class="show-details">
+                    <h6>When the Phone Rings</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/304465282/s166/the-night-agent.avif" alt="The Night Agent">
+                <div class="show-details">
+                    <h6>Night Agent</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/319680932/s166/the-auditors.avif" alt="The Auditors">
+                <div class="show-details">
+                    <h6>The Auditors</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/195242587/s166/the-good-detective.avif" alt="The Good Detective">
+                <div class="show-details">
+                    <h6>The Good Detective</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/310573032/s166/captivating-the-king.avif" alt="Captivating the King">
+                <div class="show-details">
+                    <h6>Captivating the King</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/173559746/s166/hospital-playlist.avif" alt="Hospital Playlist">
+                <div class="show-details">
+                    <h6>Hospital Playlist</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/176932032/s166/crash-landing-on-you.avif" alt="Crash Landing on You">
+                <div class="show-details">
+                    <h6>Crash Landing on Yout</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/245421669/s166/mr-sunshine-2018.avif" alt="Mr. Sunshine">
+                <div class="show-details">
+                    <h6>Mr. Sunshine</h6>
+                    <p>3 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Sci-Fi, Thriller</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <h2>Top 10 in Pakistan</h2>
+        <div class="trending-shows">
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/17033896/s166/victoria.avif" alt="Victoria ">
+                <div class="show-details">
+                    <h6>Victoria </h6>
+                    <p>2 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Action, Adventure</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/307608770/s166/wilderness.avif" alt="Wilderness">
+                <div class="show-details">
+                    <h6>Wilderness</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/256459396/s166/thunderbirds-are-go.avif" alt="Thunderbirds Are Go!">
+                <div class="show-details">
+                    <h6>Thunderbirds Are Go!</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/245371764/s166/mysteries-of-the-abandoned.avif" alt="Mysteries of the Abandoned">
+                <div class="show-details">
+                    <h6>Mysteries of the Abandoned</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/40577361/s166/next-of-kin.avif" alt="About the TV show">
+                <div class="show-details">
+                    <h6>About the TV show</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/321599273/s166/lady-night.avif" alt="Lady Night">
+                <div class="show-details">
+                    <h6>Lady Night</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/158409405/s166/the-witcher.avif" alt="The Witcher">
+                <div class="show-details">
+                    <h6>The Witcher</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322860931/s166/when-the-stars-gossip.avif" alt="The Night Agent">
+                <div class="show-details">
+                    <h6>The Night Agent</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/252184951/s166/squid-game.avif" alt="Squid Game">
+                <div class="show-details">
+                    <h6>Squid Game</h6>
+                    <p>3 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Sci-Fi, Thriller</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div><div class="container">
+        <h2>Movies</h2>
+        <div class="trending-shows">
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322704138/s166/no-good-deed.avif" alt="No Good Deed ">
+                <div class="show-details">
+                    <h6>No Good Deed </h6>
+                    <p>2 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Action, Adventure</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/253355386/s166/outlander.avif" alt="Outlander ">
+                <div class="show-details">
+                    <h6>Outlander </h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322754404/s166/cruel-intentions.avif" alt="Cruel Intentions">
+                <div class="show-details">
+                    <h6>Cruel Intentions</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/323297929/s166/anne-rices-mayfair-witches.avif" alt="Mayfair Witches">
+                <div class="show-details">
+                    <h6>Mayfair Witches</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/300933349/s166/interview-with-the-vampire.avif" alt="Interview with the Vampire">
+                <div class="show-details">
+                    <h6>Interview with the Vampire</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/232441668/s166/s-w-a-t-2017-0.avif" alt="S.W.A.T.">
+                <div class="show-details">
+                    <h6>S.W.A.T.</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/300729265/s166/seal-team.avif" alt="SEAL Team">
+                <div class="show-details">
+                    <h6>SEAL Team</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/240515920/s166/riviera.avif" alt="Riviera ">
+                <div class="show-details">
+                    <h6>Riviera </h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/252184951/s166/squid-game.avif" alt="Squid Game">
+                <div class="show-details">
+                    <h6>Squid Game</h6>
+                    <p>3 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Sci-Fi, Thriller</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div> <div class="container">
+        <h2>Only in netflix</h2>
+        <div class="trending-shows">
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322860931/s166/when-the-stars-gossip.avif" alt="Squid Game">
+                <div class="show-details">
+                    <h6>When the Stars Gossip</h6>
+                    <p>2 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Action, Adventure</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/323281168/s166/when-the-phone-rings.avif" alt="The Night Agent">
+                <div class="show-details">
+                    <h6>When the Phone Rings</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/304465282/s166/the-night-agent.avif" alt="The Night Agent">
+                <div class="show-details">
+                    <h6>Night Agent</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/319680932/s166/the-auditors.avif" alt="The Auditors">
+                <div class="show-details">
+                    <h6>The Auditors</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/195242587/s166/the-good-detective.avif" alt="The Good Detective">
+                <div class="show-details">
+                    <h6>The Good Detective</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/310573032/s166/captivating-the-king.avif" alt="Captivating the King">
+                <div class="show-details">
+                    <h6>Captivating the King</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/173559746/s166/hospital-playlist.avif" alt="Hospital Playlist">
+                <div class="show-details">
+                    <h6>Hospital Playlist</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/176932032/s166/crash-landing-on-you.avif" alt="Crash Landing on You">
+                <div class="show-details">
+                    <h6>Crash Landing on Yout</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/245421669/s166/mr-sunshine-2018.avif" alt="Mr. Sunshine">
+                <div class="show-details">
+                    <h6>Mr. Sunshine</h6>
+                    <p>3 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Sci-Fi, Thriller</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div></div><div class="container">
+        <h2>Movies</h2>
+        <div class="trending-shows">
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322704138/s166/no-good-deed.avif" alt="No Good Deed ">
+                <div class="show-details">
+                    <h6>No Good Deed </h6>
+                    <p>2 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Action, Adventure</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/253355386/s166/outlander.avif" alt="Outlander ">
+                <div class="show-details">
+                    <h6>Outlander </h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/322754404/s166/cruel-intentions.avif" alt="Cruel Intentions">
+                <div class="show-details">
+                    <h6>Cruel Intentions</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/323297929/s166/anne-rices-mayfair-witches.avif" alt="Mayfair Witches">
+                <div class="show-details">
+                    <h6>Mayfair Witches</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/300933349/s166/interview-with-the-vampire.avif" alt="Interview with the Vampire">
+                <div class="show-details">
+                    <h6>Interview with the Vampire</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/232441668/s166/s-w-a-t-2017-0.avif" alt="S.W.A.T.">
+                <div class="show-details">
+                    <h6>S.W.A.T.</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/300729265/s166/seal-team.avif" alt="SEAL Team">
+                <div class="show-details">
+                    <h6>SEAL Team</h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>   <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/240515920/s166/riviera.avif" alt="Riviera ">
+                <div class="show-details">
+                    <h6>Riviera </h6>
+                    <p>1 Season</p>
+                    <p>Comedy, Drama</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+            <div class="trending-show">
+                <img src="https://images.justwatch.com/poster/252184951/s166/squid-game.avif" alt="Squid Game">
+                <div class="show-details">
+                    <h6>Squid Game</h6>
+                    <p>3 Seasons | <i class="fas fa-headphones"></i> Spatial Audio</p> 
+                    <p>Sci-Fi, Thriller</p>
+                    <i class="fas fa-play"></i>
+                    <i class="fas fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+
+    <script src="https://kit.fontawesome.com/your-fontawesome-kit.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <!-- Footer -->
+    <footer style="background-color: #141414; padding: 2rem 0; color: white;">
+        <div class="container text-center">
+            <!-- Netflix Logo -->
+            <div class="mb-4">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg" alt="Netflix Logo" style="height: 50px;">
+            </div>
+    
+            <!-- Social Media Icons -->
+            <div class="mb-4">
+                <a href="#" class="text-white mx-2" style="font-size: 1.5rem;"><i class="fab fa-facebook"></i></a>
+                <a href="#" class="text-white mx-2" style="font-size: 1.5rem;"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="text-white mx-2" style="font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="text-white mx-2" style="font-size: 1.5rem;"><i class="fab fa-youtube"></i></a>
+            </div>
+    
+            <!-- Footer Links -->
+            <div class="row text-center mb-4">
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">FAQ</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Help Center</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Terms of Use</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Privacy</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Corporate Information</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Media Center</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Investor Relations</a>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <a href="#" class="text-light" style="text-decoration: none;">Contact Us</a>
+                </div>
+            </div>
+    
+            <!-- Disclaimer -->
+            <div class="text-light mb-3" style="font-size: 0.9rem;">
+                &copy; 2025 Netflix Clone. This is a mockup site for educational purposes only.
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const video = document.getElementById('background-video');
+        const muteBtn = document.getElementById('mute-btn');
+        const muteIcon = muteBtn.querySelector('i');
+
+        muteBtn.addEventListener('click', () => {
+            if (video.muted) {
+                video.muted = false;
+                muteIcon.classList.remove('fa-volume-mute');
+                muteIcon.classList.add('fa-volume-up');
+            } else {
+                video.muted = true;
+                muteIcon.classList.remove('fa-volume-up');
+                muteIcon.classList.add('fa-volume-mute');
+            }
+        });
+
+        function scrollLeft(containerId) {
+            const container = document.getElementById(containerId);
+            container.scrollLeft -= 200;
+        }
+
+        function scrollRight(containerId) {
+            const container = document.getElementById(containerId);
+            container.scrollLeft += 200;
+        }
+    </script>
+</body>
+</html>

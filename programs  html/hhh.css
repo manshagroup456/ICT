@@ -1,0 +1,16 @@
+#blog{
+    color: hsla(145, 79%, 48%, 0.479);
+   
+}
+p{
+    color: blue;
+   text-decoration:underline;
+}
+div:hover{
+    color: rgb(47, 71, 22);
+    
+}
+#h111{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   text-align: center;
+}

@@ -1,0 +1,50 @@
+.{
+    margin: 0%;
+}
+    .container {
+        height: 100vh;
+        display: grid;
+        border: 2px solid black;
+        grid-template-areas: "head head head"
+                             " side1 main main"
+                            "foot foot foot ";
+        grid-template-columns: 1fr 2fr 1fr;
+        grid-template-rows: 1fr 2fr auto;}
+
+
+.head{
+    display: grid;
+    grid-area: head;
+    background-color: black;
+    color: aliceblue;
+    justify-content: center;
+    align-content: center;
+}
+.sidebar1{
+    display: grid;
+    grid-area: side1;
+    background-color: rgb(65, 117, 14);
+    justify-content: center;
+    align-content: center;
+}
+.sidebar2{
+    display: grid;
+    grid-area: main;
+    background-color: rgb(66, 83, 182);
+    justify-content: center;
+    align-content: center;
+}
+.main{
+    display: grid;
+    grid-area: main;
+    background-color:blueviolet;
+    justify-content: center;
+    align-content: center;
+}
+.foot{
+    display: grid;
+    grid-area: foot;
+    background-color: violet;
+    justify-content: center;
+    align-content: center;
+}

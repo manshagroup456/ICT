@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            margin: 0%;
+            padding: 0%;
+        }
+        .navbar{
+            height: 5vh;
+            background-color: grey;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            /* justify-content: space-around;*/
+            justify-content: space-evenly; 
+            padding: 10px;
+            /* justify-content: baseline; */
+            align-items: center;
+        }
+        .search_button{
+            display: inline-block;
+            /* border-radius:20px ; */
+            justify-content: center;
+            padding: 0%;
+           
+            all: unset;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div>Home</div>
+        <div>About</div>
+        <div>Contact</div>
+        <div class="search-button">
+            <input type="text" placeholder="Enter you name" class="search" >
+            <button>search</button>
+        </div>
+    </div>
+
+    
+</body>
+</html>
